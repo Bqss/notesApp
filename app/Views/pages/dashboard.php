@@ -3,9 +3,9 @@
     <div class="mt-6" x-data="{ isAdd :  false }">
         <div class="flex items-end justify-between">
             <button @click="isAdd = true" class="bg-blue-600 text-base font-medium px-4 py-2 rounded-md text-text-dark">Add Notes</button>
-            <form action="/dashboard" method="post">
+            <form action="/dashboard" method="get">
                 <div class="relative">
-                    <input type="text" id="search" class=" text-sm text-text-light focus:pl-5 transition-all peer dark:text-text-dark bg-white dark:bg-secondary-dark  px-5 py-2 pl-10  border outline-none rounded-md border-gray-300 dark:border-transparent  focus:border-blue-500  dark:focus:border-blue-500 "  name="search" value="" placeholder="Search by title">
+                    <input type="text" id="search" class=" text-sm text-text-light focus:pl-5 transition-all peer dark:text-text-dark bg-white dark:bg-secondary-dark  px-5 py-2 pl-10  border outline-none rounded-md border-gray-300 dark:border-transparent  focus:border-blue-500  dark:focus:border-blue-500 "  name="search" value="<?=isset($keyword) ? $keyword : ''   ?> " placeholder="Search by title">
                     <label for="search" class="absolute left-2 top-1/2 -translate-y-1/2 cursor-text peer-focus:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-black dark:stroke-white" stroke-width="1.5" width="20" height="20">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
@@ -39,13 +39,13 @@
             
         </div>
         <?php if(isset($notes)&&count($notes) > 0): ?>
-            <div class="w-full grid  lg:grid-cols-3 gap-4 mt-8 rounded-md">
+            <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8 rounded-md">
                 <?php foreach($notes as $d) :?>
                     <div class="bg-white dark:bg-secondary-dark p-6 flex flex-col justify-between rounded-md min-h-[15rem]">
                         <div >
-                            <h3 class="text-text-light dark:text-text-dark line-clamp-1 text-ellipsis "><?= $d["title"]?></h3>
+                            <h3 class="text-text-light dark:text-text-dark line-clamp-1 text-ellipsis "><?= $d["note_title"]?></h3>
                             <p class="text-text-light dark:text-text-dark  text-sm mt-2 "><?= $d["created_at"] ?></p>
-                            <p class="text-text-light dark:text-text-dark  text-sm mt-3 line-clamp-2 break-words"><?= $d["text"] ?></p>
+                            <p class="text-text-light dark:text-text-dark  text-sm mt-3 line-clamp-2 break-words"><?= $d["note_text"] ?></p>
                         </div>
 
                         <!-- method spoofing -->
@@ -80,7 +80,7 @@
                 <?php endforeach?>
             </div>
         <?php else :?>
-                <p class="text-center rounded-lg bg-white dark:bg-secondary-dark py-24 mt-8 ">There's no active note</p>
+                <p class="text-center rounded-lgf bg-white dark:bg-secondary-dark py-24 mt-8 ">There's no active note <?= isset($keyword) ? "with title : $keyword" : '' ?></p>
         <?php endif ?>
     </div>
 <?php $this->endSection();?>

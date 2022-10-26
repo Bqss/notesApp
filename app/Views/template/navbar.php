@@ -4,7 +4,7 @@ $active = session()->get("active_page"); ?>
 <header>
     <nav class="transition-colors duration-300">
         <div class=" flex justify-between  mt-10 mx-auto bg-secondary-light dark:bg-secondary-dark px-5 py-4 rounded-lg items-center">
-            <a href="/" class="inline-flex items-center gap-4">
+            <a href="/dashboard" class="inline-flex items-center gap-4">
                 <img src="/images/logo.jfif" alt="logo" class="w-10 h-10 rounded-lg">
                 <span class="text-xl text-text-light dark:text-text-dark font-semibold">Note App</span>
             </a>
@@ -40,7 +40,7 @@ $active = session()->get("active_page"); ?>
                             </svg>
                         </button>
                         <p class="text-sm hover:cursor-default"><?= session()->get("username")?></p>
-                        <div x-show="isExpand" class="absolute flex flex-col items-center w-max rounded-md right-1/2 top-16 px-2 py-2 bg-blue-500 text-white dark:text-white " @click.outside="isExpand = false" x-transition.origin.top >
+                        <div x-show="isExpand" class="absolute flex flex-col items-center w-max rounded-md right-1/2 top-16 px-2 py-2 bg-blue-500 text-white dark:text-white z-10 " @click.outside="isExpand = false" x-transition.origin.top >
                             <ul class="space-y-1 mt-3 w-full">
                                 <li><a class=" block py-2 px-4  transition duration-100 rounded-md hover:bg-blue-300  text-sm" href="/profile">View Profile</a></li>
                                 <li><a class=" block py-2 px-4  transition duration-100 rounded-md hover:bg-blue-300  text-sm" href="/logout">Logout</a></li>

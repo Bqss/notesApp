@@ -21,7 +21,7 @@
                         <input type="password" name="password" value="" id="password"  class="rounded-md bg-transparent text-text-light border-gray-400 px-4 py-2 text-sm dark:text-gray-300 ring-2 ring-transparent  border transition duration-300 outline-none focus:border-blue-400 focus:ring-blue-300/40 " autocomplete="current-password" >
                     </div>
                     <input role="button" type="submit" class="w-full bg-blue-600 py-3 block mt-6 font-medium text-text-dark  rounded-md hover:bg-blue-700 " value="Login">
-                    <p class="text-sm text-black dark:text-white mt-2">Don't have account ?, click  <a href="/signup" class="text-blue-400">here </a>to Signup</p>
+                    <p class="text-sm text-black dark:text-white mt-2">Don't have account ?, click  <a href="/register" class="text-blue-400">here </a>to Signup</p>
                 </form>
             </div>
         </div>

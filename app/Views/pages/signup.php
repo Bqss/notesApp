@@ -1,8 +1,8 @@
 <?php $this->extend("pageLayout")?>
 <?php $this->section("content") ?>
-<?php $validation = session() -> getFlashdata('validation') ?? null ?>
+
     <main>
-        <?php if(isset($validation)):?>
+        <?php if(isset($errors)):?>
             <div aria-live="assertive" class="fixed inset-0  flex items-start px-4 py-6 pointer-events-none sm:p-6 sm:items-start" x-data="{ isShow : true }" >
                 <div class="w-full flex flex-col items-center space-y-4 sm:items-end" x-show="isShow" 
                 x-transition:leave="transition linear duration-500"
@@ -42,7 +42,7 @@
                 <h1 class="mb-1">Let's Get Started</h1>
                 <p>Register now and enjoy write your notes</p>
                 
-                <form action="/signup" class="mt-6" method="POST">
+                <form action="/register" class="mt-6" method="POST">
                     <?=csrf_field(); ?>
                     <div class="flex flex-col">
                         <label for="username" class="text-sm text-gray-600 dark:text-gray-300 mb-1">Username</label>
@@ -60,7 +60,7 @@
                         <small class="text-xs mt-1 text-red-500"><?= isset($validation) ? $validation->getError("password") : '' ?></small>
                     </div>
                     <div class="flex flex-col mt-2" >
-                        <label for="confirm_password" class="text-sm text-gray-600 dark:text-gray-300 mb-1 ">Password Confirmation</label>
+                        <label for="pass_confirm" class="text-sm text-gray-600 dark:text-gray-300 mb-1 ">Password Confirmation</label>
                         <input  type="password" name="confirm_password" id="confirm_password"  class="rounded-md bg-transparent text-text-light px-4 py-2 text-sm dark:text-gray-300 border transition-colors ring-transparent ring-2   duration-300 outline-none   border-gray-500 <?= (isset($validation) && $validation->hasError("confirm_password")) ? "border-red-500 focus:ring-red-300/40 focus:border-red-500" : "focus:border-blue-400 focus:ring-blue-300/40" ?>" autocomplete="current-password" placeholder="Enter your confirm password">
                         <small class="text-xs mt-1 text-red-500"><?= isset($validation) ? $validation->getError("confirm_password") : '' ?></small>
                     </div>

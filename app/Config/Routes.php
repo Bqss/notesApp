@@ -37,17 +37,17 @@ $routes->set404Override();
 // route since we don't have to scan directories.]
 
 // page routes
-$routes -> group("/" , static function($routes){
-    $routes->get('signup',"SignupController::index",["filter"=> "Distract"]);
-    $routes->get('login',"LoginController::index",["filter"=> "Distract"]);
-    $routes-> match(["get","post"],'login',"LoginController::login"); 
-    $routes-> match(["get","post"],'signup','SignUpController::store');
-    $routes -> get("logout","LoginController::logout", ["filter" => "AuthGuard"] );
-});
+// $routes -> group("/" , static function($routes){
+//     $routes->get('signup',"SignupController::index",["filter"=> "Distract"]);
+//     $routes->get('login',"LoginController::index",["filter"=> "Distract"]);
+//     $routes-> match(["get","post"],'login',"LoginController::login"); 
+//     $routes-> match(["get","post"],'signup','SignUpController::store');
+//     $routes -> get("logout","LoginController::logout", ["filter" => "AuthGuard"] );
+// });
 
 // crud routes
 $routes -> group("/",static function($routes) {
-    $routes -> match(["get","post"], "/dashboard" , "NoteCrud::index",["filter" => "AuthGuard"]);
+    $routes -> get("dashboard" , "NoteCrud::index");
     $routes -> get("archive", "NoteCrud::archive");
     $routes -> post("delete/(:segment)","NoteCrud::delete/$1");
     $routes -> post("addNote","NoteCrud::add");

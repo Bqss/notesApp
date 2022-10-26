@@ -8,15 +8,15 @@ class NoteModel extends Model{
     protected $returnType = "array";
 
     protected $allowedFields = [
-        "text",
+        "note_text",
         "isArchived",
-        "user_id",
+        "id_user",
         "created_at",
-        "title"
+        "note_title"
     ];
     public function search($keyword){
         $result = $this -> table("note");
-        $result = $result -> like("title",$keyword);
+        $result = $result -> like("note_title",$keyword);
         return $result;
     }
 }

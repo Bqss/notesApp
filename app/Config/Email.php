@@ -9,12 +9,12 @@ class Email extends BaseConfig
     /**
      * @var string
      */
-    public $fromEmail;
+    public $fromEmail = "basofi.cocokmeong12@gmail.com";
 
     /**
      * @var string
      */
-    public $fromName;
+    public $fromName = "Basofi";
 
     /**
      * @var string
@@ -110,7 +110,7 @@ class Email extends BaseConfig
      *
      * @var string
      */
-    public $mailType = 'text';
+    public $mailType = 'html';
 
     /**
      * Character set (utf-8, iso-8859-1, etc.)
