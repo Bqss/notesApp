@@ -26,7 +26,10 @@ class Filters extends BaseConfig
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
         'AuthGuard' => AuthGuard :: class,
-        "Distract" => Distract :: class
+        "Distract" => Distract :: class,
+        'login'      => \Myth\Auth\Filters\LoginFilter::class,
+        'role'       => \Myth\Auth\Filters\RoleFilter::class,
+        'permission' => \Myth\Auth\Filters\PermissionFilter::class,
     ];
 
     /**
@@ -72,5 +75,7 @@ class Filters extends BaseConfig
      *
      * @var array
      */
-    public $filters = [];
+    public $filters = [
+        'login' => ["before" => ['dashboard','archive']]
+    ];
 }

@@ -1,11 +1,11 @@
 <?php $this -> extend("pageLayout");  ?>
 <?php $this -> section("content");?>
-    <div class="mt-6" x-data="{ isAdd :  false }">
+    <div class="mt-6" x-data="modal">
         <div class="flex items-end justify-between">
-            <button @click="isAdd = true" class="bg-blue-600 text-base font-medium px-4 py-2 rounded-md text-text-dark">Add Notes</button>
+            <button @click="showModal" class="bg-blue-600 text-base font-medium px-4 py-2 rounded-md text-text-dark">Add Notes</button>
             <form action="/dashboard" method="get">
                 <div class="relative">
-                    <input type="text" id="search" class=" text-sm text-text-light focus:pl-5 transition-all peer dark:text-text-dark bg-white dark:bg-secondary-dark  px-5 py-2 pl-10  border outline-none rounded-md border-gray-300 dark:border-transparent  focus:border-blue-500  dark:focus:border-blue-500 "  name="search" value="<?=isset($keyword) ? $keyword : ''   ?> " placeholder="Search by title">
+                    <input type="text" id="search" class=" text-sm text-text-light focus:pl-5 transition-all peer dark:text-text-dark bg-white dark:bg-secondary-dark  px-5 py-2 pl-10  border outline-none rounded-md border-gray-300 dark:border-transparent  focus:border-blue-500  dark:focus:border-blue-500 "  name="search" value="<?=isset($keyword) ? $keyword : null ?>" placeholder="Search by title">
                     <label for="search" class="absolute left-2 top-1/2 -translate-y-1/2 cursor-text peer-focus:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-black dark:stroke-white" stroke-width="1.5" width="20" height="20">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
@@ -14,11 +14,11 @@
                 </div>
             </form>
         </div>
-        <div class=" text-text-dark  z-10 absolute inset-0 grid place-items-center backdrop-blur-sm " x-show="isAdd" @click.away="isAdd=false" x-transition>
-            <div class="w-11/12 max-w-2xl p-6 pt-8 rounded-lg bg-white -mt-10 bg-gray-white text-black dark:text-white dark:bg-[#1A1B1E]" @click.outside="isAdd= false">
+        <div class=" text-text-dark  z-10 absolute inset-0 grid place-items-center backdrop-blur-sm " x-show="show"  x-transition>
+            <div class="w-11/12 max-w-2xl p-6 pt-8 rounded-lg bg-white -mt-10 bg-gray-white text-black dark:text-white dark:bg-[#1A1B1E]" @click.outside="hide">
                 <div class="flex justify-between">
                     <span>Create New Note</span>
-                    <button @click="isAdd=false">
+                    <button @click="hide">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
@@ -68,7 +68,7 @@
                             </form> 
                             <form action="detail/<?= $d["note_id"] ?> " method="post" class="relative">
                                 <button type="submit" class="p-2 rounded-md bg-btn-detail-light dark:bg-btn-detail-dark peer">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 2 4" stroke-width="1.5" class="w-6 h-5  stroke-blue-500 dark:stroke-blue-200">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-6 h-5  stroke-blue-500 dark:stroke-blue-200">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>

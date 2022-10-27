@@ -1,4 +1,4 @@
-<?php $msg = session() -> getFlashdata('msg')?>
+<?php $msg = session("error")?>
 <?php if(isset($msg)): ?>
     <div aria-live="assertive" class="fixed inset-0  flex items-start px-4 py-6 pointer-events-none sm:p-6 sm:items-start" x-data="{isShow : true}" >
         <div class="w-full flex flex-col items-center space-y-4 sm:items-end" x-show="isShow" 
@@ -17,7 +17,7 @@
                         </div>
                         <div class="ml-3 w-0 flex-1 pt-0.5">
                             <p class="text-base font-medium text-black dark:text-white">Error has encoured!</p>
-                            <p class="mt-1 text-sm text-black dark:text-white "><?= session()->getFlashdata("msg")?></p>
+                            <p class="mt-1 text-sm text-black dark:text-white "><?= $msg?></p>
                         </div>
                         <div class="ml-4 flex-shrink-0 flex">
                             <button class="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 group" @click="isShow=false">

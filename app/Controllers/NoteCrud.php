@@ -19,7 +19,7 @@
         public function add() {
             $noteModel = new NoteModel();
             $note = [
-                "id_user" => (int) session()->get("id"),
+                "id_user" => (int) user_id(),
                 "note_title" => $this ->request -> getPost("title"),
                 "note_text" => $this -> request -> getPost("body"),
                 "isArchived" => false 
@@ -37,7 +37,6 @@
             $note = $noteModel-> where("note_id",$s1) -> first();
             return view("pages/detail",$note);
         }
-
         public function archive(){
             $noteModel = new NoteModel();
             $searchKey = $this-> request-> getGet("search");
@@ -47,7 +46,6 @@
                 "keyword" => $searchKey
             ];
             session()->set("active_page","archive");
-
             return view("pages/archive",$data);
         }
         

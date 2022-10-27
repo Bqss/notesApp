@@ -42,7 +42,7 @@ class Note extends Migration
         ]);
 
         $forge -> addPrimaryKey("note_id");
-        $forge -> addForeignKey("id_user",'user','user_id');
+        $forge -> addForeignKey("id_user",'users','id');
         $forge -> createTable('Note');
     }
 

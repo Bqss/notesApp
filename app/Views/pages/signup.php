@@ -2,7 +2,7 @@
 <?php $this->section("content") ?>
 
     <main>
-        <?php if(isset($errors)):?>
+        <?php $errors = session('errors'); if(isset($errors)):?>
             <div aria-live="assertive" class="fixed inset-0  flex items-start px-4 py-6 pointer-events-none sm:p-6 sm:items-start" x-data="{ isShow : true }" >
                 <div class="w-full flex flex-col items-center space-y-4 sm:items-end" x-show="isShow" 
                 x-transition:leave="transition linear duration-500"
@@ -19,7 +19,7 @@
                                 </div>
                                 <div class="ml-3 w-0 flex-1 pt-0.5">
                                     <p class="text-base font-medium text-black dark:text-white">Error has encoured!</p>
-                                    <p class="mt-1 text-sm text-black dark:text-white "><?php $res = $validation -> getErrors() ; echo array_shift($res);  ?></p>
+                                    <p class="mt-1 text-sm text-black dark:text-white "><?=  array_shift($errors);  ?></p>
                                 </div>
                                 <div class="ml-4 flex-shrink-0 flex">
                                     <button class="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 group" @click="isShow=false">
@@ -46,23 +46,23 @@
                     <?=csrf_field(); ?>
                     <div class="flex flex-col">
                         <label for="username" class="text-sm text-gray-600 dark:text-gray-300 mb-1">Username</label>
-                        <input type="text" name="username" id="username" value="<?= old("username")?>" class="rounded-md bg-transparent px-4 py-2  text-text-light text-sm dark:text-gray-300 border transition-colors ring-2 ring-transparent duration-300 outline-none  border-gray-500 <?= (isset($validation) && $validation->hasError("username")) ? "border-red-500 focus:ring-red-300/40 focus:border-red-500" : "focus:border-blue-400 focus:ring-blue-300/40" ?>"  placeholder="Enter your username" autocomplete="username">
-                        <small class="text-xs mt-1 text-red-500"><?= isset($validation) ? $validation->getError("username") : '' ?></small>
+                        <input type="text" name="username" id="username" value="<?= old("username")?>" class="rounded-md bg-transparent px-4 py-2  text-text-light text-sm dark:text-gray-300 border transition-colors ring-2 ring-transparent duration-300 outline-none  border-gray-500 <?= (session('errors.password') ) ? "border-red-500 focus:ring-red-300/40 focus:border-red-500" : "focus:border-blue-400 focus:ring-blue-300/40" ?>"  placeholder="Enter your username" autocomplete="username">
+                        <small class="text-xs mt-1 text-red-500"><?= session('errors.username') ? session('errors.username') : '' ?></small>
                     </div>
                     <div class="flex flex-col mt-2" >
                         <label for="email" class="text-sm text-gray-600 dark:text-gray-300 mb-1">Email</label>
-                        <input type="email" name="email" id="email" value="<?= old("email")?>" class="rounded-md bg-transparent text-text-light px-4 outline-offset-[-2px] py-2 text-sm dark:text-gray-300 border transition-colors ring-transparent ring-2  duration-300 outline-none  focus:invalid:border-red-500  focus:invalid:ring-red-400/40 border-gray-500 <?= (isset($validation) && $validation->hasError("email")) ? "border-red-500 focus:ring-red-300/40 focus:border-red-500" : "focus:border-blue-400 focus:ring-blue-300/40" ?>" autocomplete="email" placeholder="Enter your email" >
-                        <small class="text-xs mt-1 text-red-500"><?= isset($validation) ? $validation->getError("email") : '' ?></small>
+                        <input type="email" name="email" id="email" value="<?= old("email")?>" class="rounded-md bg-transparent text-text-light px-4 outline-offset-[-2px] py-2 text-sm dark:text-gray-300 border transition-colors ring-transparent ring-2  duration-300 outline-none  focus:invalid:border-red-500  focus:invalid:ring-red-400/40 border-gray-500 <?= (session('errors.password') ) ? "border-red-500 focus:ring-red-300/40 focus:border-red-500" : "focus:border-blue-400 focus:ring-blue-300/40" ?>" autocomplete="email" placeholder="Enter your email" >
+                        <small class="text-xs mt-1 text-red-500"><?= session('errors.email') ? session("errors.email") : '' ?></small>
                     </div>
                     <div class="flex flex-col mt-2" >
                         <label for="password" class="text-sm text-gray-600 dark:text-gray-300 mb-1">Password</label>
-                        <input type="password" name="password" id="password"  class="rounded-md bg-transparent text-text-light px-4 py-2 text-sm dark:text-gray-300 border transition-colors ring-transparent ring-2   duration-300 outline-none  border-gray-500 <?= (isset($validation) && $validation->hasError("password")) ? "border-red-500 focus:ring-red-300/40 focus:border-red-500" : "focus:border-blue-400 focus:ring-blue-300/40" ?>"  placeholder="Enter your password" autocomplete="new-password">
-                        <small class="text-xs mt-1 text-red-500"><?= isset($validation) ? $validation->getError("password") : '' ?></small>
+                        <input type="password" name="password" id="password"  class="rounded-md bg-transparent text-text-light px-4 py-2 text-sm dark:text-gray-300 border transition-colors ring-transparent ring-2   duration-300 outline-none  border-gray-500 <?= (session('errors.password') ) ? "border-red-500 focus:ring-red-300/40 focus:border-red-500" : "focus:border-blue-400 focus:ring-blue-300/40" ?>"  placeholder="Enter your password" autocomplete="new-password">
+                        <small class="text-xs mt-1 text-red-500"><?= session('errors.password') ? session('errors.password') : '' ?></small>
                     </div>
                     <div class="flex flex-col mt-2" >
                         <label for="pass_confirm" class="text-sm text-gray-600 dark:text-gray-300 mb-1 ">Password Confirmation</label>
-                        <input  type="password" name="confirm_password" id="confirm_password"  class="rounded-md bg-transparent text-text-light px-4 py-2 text-sm dark:text-gray-300 border transition-colors ring-transparent ring-2   duration-300 outline-none   border-gray-500 <?= (isset($validation) && $validation->hasError("confirm_password")) ? "border-red-500 focus:ring-red-300/40 focus:border-red-500" : "focus:border-blue-400 focus:ring-blue-300/40" ?>" autocomplete="current-password" placeholder="Enter your confirm password">
-                        <small class="text-xs mt-1 text-red-500"><?= isset($validation) ? $validation->getError("confirm_password") : '' ?></small>
+                        <input  type="password" name="pass_confirm" id="confirm_password"  class="rounded-md bg-transparent text-text-light px-4 py-2 text-sm dark:text-gray-300 border transition-colors ring-transparent ring-2   duration-300 outline-none   border-gray-500 <?= (session('errors.password') ) ? "border-red-500 focus:ring-red-300/40 focus:border-red-500" : "focus:border-blue-400 focus:ring-blue-300/40" ?>" autocomplete="current-password" placeholder="Enter your confirm password">
+                        <small class="text-xs mt-1 text-red-500"><?= session('errors.pass_confirm') ? session("errors.pass_confirm") : '' ?></small>
                     </div>
                     <input role="button" type="submit" class="w-full bg-blue-600 py-2 block mt-6 font-medium text-text-dark  rounded-md hover:bg-blue-700 " value="Register">
                     <p class="text-sm text-black dark:text-white mt-2">Have account ?, click  <a href="/login" class="text-blue-400">here </a>to Login</p>

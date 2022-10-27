@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" x-data="{ isDark : JSON.parse(localStorage.getItem('dark') || 'true' )}" x-init="$watch('isDark', value => {localStorage.setItem('dark',JSON.stringify(value))});  "  >
+<html lang="en"   >
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="/dist/style.css">
     <script src="/dist/script.js" defer></script>
 </head>
-<body class="font-nunito antialiased" :class=" isDark ? 'dark bg-primary-dark' : 'bg-primary-light'">
-
+<body 
+class="font-nunito antialiased"
+ x-data :class="$store.theme.isDark ? 'dark bg-primary-dark' : 'bg-primary-light' " 
+ x-init="$store.theme.init() ; $watch('$store.theme.isDark', value => $store.theme.update(value))">
     <div class=" w-11/12 max-w-[60rem] mx-auto">
         <?= $this->include('template/navbar')?>
         <?= $this->renderSection('content')?>

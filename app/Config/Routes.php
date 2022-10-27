@@ -36,14 +36,7 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.]
 
-// page routes
-// $routes -> group("/" , static function($routes){
-//     $routes->get('signup',"SignupController::index",["filter"=> "Distract"]);
-//     $routes->get('login',"LoginController::index",["filter"=> "Distract"]);
-//     $routes-> match(["get","post"],'login',"LoginController::login"); 
-//     $routes-> match(["get","post"],'signup','SignUpController::store');
-//     $routes -> get("logout","LoginController::logout", ["filter" => "AuthGuard"] );
-// });
+
 
 // crud routes
 $routes -> group("/",static function($routes) {
