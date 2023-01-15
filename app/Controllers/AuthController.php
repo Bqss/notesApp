@@ -23,7 +23,7 @@ class AuthController extends BaseController
 
     public function login (){
       if($this-> auth -> isLoggedIn()){
-        return redirect()->to("/dashboard");
+        return redirect()->to("/");
       }
       return view($this->config->views['login']);
     }
@@ -32,10 +32,11 @@ class AuthController extends BaseController
 
       $user = $this->auth->attempLogin($credentials);
       if(!$user){
-        return redirect()->back()->withInput()->with("error", $this->auth->getError());
+        session()->setFlashdata("error" , $this->auth->getError());
+        return redirect()->back()->withInput();
       }
 
-      return redirect()->to("/dashboard");
+      return redirect()->to("/");
       
     }
 

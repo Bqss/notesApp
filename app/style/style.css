@@ -29,5 +29,10 @@
     p{
         @apply text-gray-600 dark:text-gray-300;
     }
+    
 
+}
+
+[x-cloak]{
+  display: none !important;
 }

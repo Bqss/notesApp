@@ -36,12 +36,12 @@
                 "isArchived" => false 
             ];
             $this->noteModel->insert($note);
-            return redirect()->to("/dashboard");
+            return redirect()->to("/");
         }
         public function delete($s1) {
             
             $this->noteModel -> where("note_id",$s1) ->delete();
-            return \redirect()->to("/dashboard");
+            return \redirect()->to("/");
         }
         public function detail($s1){
             
@@ -69,29 +69,36 @@
         }
 
         public function attempUpdate($id){  
-          $rules = [
-            "title" => "required",
-            "body" => "required"
-          ];
-          if(!$this->validate($rules)){
-            return redirect()->back()->with("error",$this->validator->getError());
-          }
+          // $rules = [
+          //   "title" => "required",
+          //   "body" => "required"
+          // ];
+          // if(!$this->validate($rules)){
+          //   return redirect()->back()->with("error",$this->validator->getError());
+          // }
+
+    
 
           $this->noteModel->where("note_id",$id)->set([
             "note_title" => $this->request->getPost("title"),
-            "note_body" => $this->request->getPost("body") 
+            "note_text" => $this->request->getPost("body") 
           ]) -> update();
-          return redirect()->to("dashboard"); 
+          return redirect()->to("/"); 
+        }
+
+        public function deleteFromArchive($id){
+          $this->noteModel -> where("note_id",$id) ->delete();
+          return \redirect()->to("/archive");
         }
         
         public function addToArchive($id) {
             
-            $this->noteModel-> whereIn("note_id",[$id])->set(["isArchived" => true])->update();
-            return redirect()-> to("/dashboard");
+            $this->noteModel-> where("note_id",$id)->set(["isArchived" => true])->update();
+            return redirect()-> to("/");
         }
         public function removeFromArchive($id){
             
-            $this->noteModel -> whereIn("note_id",[$id]) -> set(["isArchived" => false ]) -> update();
+            $this->noteModel -> where("note_id",$id) -> set(["isArchived" => false ]) -> update();
             return redirect()-> to("/archive"); 
         }
         

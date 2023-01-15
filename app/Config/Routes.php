@@ -41,23 +41,37 @@ $routes->set404Override();
 // crud routes
 $routes -> group("/",static function($routes) {
 
-    // $routes -> get("login", "NoteCrud::index");
-    $routes -> get("archive", "NoteCrud::archive");
+
+    // auth pages's route 
     $routes -> get("login", "AuthController::login");
     $routes -> get("register","AuthController::register");
-    $routes -> get("dashboard","NoteCrud::index");
-    $routes -> get("archive","NoteCrud::archive");
     $routes -> post("login","AuthController::attempLogin");
     $routes -> post ("register","AuthController::attempRegister");
     $routes -> get("logout","AuthController::attempLogout");
+
+    // dashboard page's route 
+   
+    $routes -> get("","NoteCrud::index");
+    $routes -> post("","NoteCrud::add");
+    $routes -> delete("/(:segment)","NoteCrud::delete/$1");
+    $routes -> put("/(:segment)","NoteCrud::addToArchive/$1");
+
+    // route for update's page 
     $routes -> get("update/(:segment)","NoteCrud::update/$1");
     $routes -> post("update/(:segment)","NoteCrud::attempUpdate/$1");
 
-    $routes -> post("delete/(:segment)","NoteCrud::delete/$1");
-    $routes -> post("addNote","NoteCrud::add");
-    $routes -> post("detail/(:segment)","NoteCrud::detail/$1");
-    $routes -> post("archive/add/(:segment)" , "NoteCrud::addToArchive/$1");
-    $routes -> post("archive/remove/(:segment)","NoteCrud::removeFromArchive/$1");
+    // route for detail's page 
+    $routes -> get("detail/(:segment)","NoteCrud::detail/$1");
+
+    // archive page's route 
+    $routes -> get("archive", "NoteCrud::archive");
+    $routes -> get("archive","NoteCrud::archive");
+    $routes -> put("archive/(:segment)","NoteCrud::removeFromArchive/$1");
+    $routes -> delete("archive/(:segment)","NoteCrud::deleteFromArchive/$1");
+    
+    
+    
+    ;
 });
 
 

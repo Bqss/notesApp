@@ -4,6 +4,7 @@ namespace Config;
 
 use CodeIgniter\Config\AutoloadConfig;
 
+
 /**
  * -------------------------------------------------------------------
  * AUTOLOADER CONFIGURATION
@@ -40,10 +41,12 @@ class Autoload extends AutoloadConfig
      *
      * @var array<string, string>
      */
+    
+
     public $psr4 = [
         APP_NAMESPACE => APPPATH, // For custom app namespace
         'Config'      => APPPATH . 'Config',
-        "Authentication" => APPPATH . "authentication"
+        "Authentication" => APPPATH . "authentication",
     ];
 
     /**

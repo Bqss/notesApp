@@ -11,8 +11,8 @@ $user = session()->get("user");
             </a>
             <?php if ($isLoggedIn) : ?>
                 <div>
-                    <a href="/dashboard">
-                        <button class=" <?= url_is("dashboard") ? "bg-[rgb(237,242,255)] dark:bg-navButton-dark" : ''  ?> py-2 text-blue-400  dark:text-slate-300   px-4 rounded-sm">Home</button>
+                    <a href="/">
+                        <button class=" <?= url_is("") ? "bg-[rgb(237,242,255)] dark:bg-navButton-dark" : ''  ?> py-2 text-blue-400  dark:text-slate-300   px-4 rounded-sm">Home</button>
                     </a>
                     <a href="/archive">
                         <button class="<?= url_is("archive") ? "bg-[rgb(237,242,255)] dark:bg-navButton-dark"  : '' ?> text-blue-400  dark:text-slate-300  py-2  px-4 rounded-sm">Archive</button>
@@ -41,7 +41,7 @@ $user = session()->get("user");
                             </svg>
                         </button>
                         <p class="text-sm hover:cursor-default"><?= $user["username"] ?></p>
-                        <div x-show="show" class="absolute flex flex-col items-center w-max rounded-md right-1/2 top-16 px-2 py-2 bg-blue-500 text-white dark:text-white z-10 " @click.outside="hide" x-transition.origin.top >
+                        <div x-show="show" class="absolute flex flex-col items-center w-max rounded-md right-1/2 top-16 px-2 py-2 bg-blue-500 text-white dark:text-white z-10 " @click.outside="hide" x-transition.origin.top x-cloak >
                             <ul class="space-y-1 mt-3 w-full">
                                 <li><a class=" block py-2 px-4  transition duration-100 rounded-md hover:bg-blue-400  text-sm" href="/profile">View Profile</a></li>
                                 <li><a class=" block py-2 px-4  transition duration-100 rounded-md hover:bg-blue-400  text-sm" href="/logout">Logout</a></li>
