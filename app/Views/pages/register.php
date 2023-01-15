@@ -1,4 +1,4 @@
-<?php $this->extend("pageLayout")?>
+<?php $this->extend("layout/pageLayout")?>
 <?php $this->section("content") ?>
 
     <main>

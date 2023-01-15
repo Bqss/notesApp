@@ -1,8 +1,8 @@
 
-<?= $this->extend('pageLayout')?>
+<?= $this->extend('layout/pageLayout')?>
 <?= $this->section('content')?>
     <main>
-        <?= $this->include("template/toast");?>
+        <?= $this->include("layout/toast");?>
         <div class=" p-10 flex  flex-col md:flex-row md:items-center bg-secondary-light mx-auto dark:bg-secondary-dark rounded-lg mt-7">
             <div class=" hidden md:block w-7/12">
                 <img src="/images/loginil.webp" class="-ml-12 rounded-md" alt="login-ilustraation">

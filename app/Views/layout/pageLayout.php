@@ -13,7 +13,7 @@ class="font-nunito antialiased"
  x-data :class="$store.theme.isDark ? 'dark bg-primary-dark' : 'bg-primary-light' " 
  x-init="$store.theme.init() ; $watch('$store.theme.isDark', value => $store.theme.update(value))">
     <div class=" w-11/12 max-w-[60rem] mx-auto">
-        <?= $this->include('template/navbar')?>
+        <?= $this->include('layout/navbar')?>
         <?= $this->renderSection('content')?>
     </div>
 

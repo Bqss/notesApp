@@ -1,4 +1,4 @@
-<?php $this -> extend("pageLayout");  ?>
+<?php $this -> extend("layout/pageLayout");  ?>
 <?php $this -> section("content");?>
     <div class="mt-6" x-data="modal">
         <div class="flex items-end justify-between">
@@ -27,11 +27,11 @@
                 <form action="/addNote"  method="post" class="mt-10" >
                     <div class="mb-2">
                         <label for="title " class="text-sm">Title*</label>
-                        <input type="text"  class="w-full rounded-md bg-white dark:bg-secondary-dark text-sm p-2 px-5 border border-gray-300 dark:border-gray-700 outline-none focus:border-blue-500 " name="title" id="title">
+                        <input type="text"  class="w-full rounded-md bg-white dark:bg-secondary-dark text-sm p-2 px-5 border border-gray-300 dark:border-gray-700 outline-none focus:border-blue-500 " name="title" id="title" required>
                     </div>
                     <div class="">
                         <label for="body" class="text-sm">Body*</label>
-                        <textarea name="body" id="body" class="w-full rounded-md resize-none bg-white dark:bg-secondary-dark text-sm p-2 px-5 border border-gray-300 dark:border-gray-700 outline-none focus:border-blue-500 " rows="10"></textarea>
+                        <textarea name="body" id="body" class="w-full rounded-md resize-none bg-white dark:bg-secondary-dark text-sm p-2 px-5 border border-gray-300 dark:border-gray-700 outline-none focus:border-blue-500 " rows="10" required ></textarea>
                     </div>
                     <input type="submit" class="w-full bg-blue-600  text-white dar rounded-md py-3 text-sm mt-2 hover:bg-blue-500" role="button"  value="Add Note"> 
                 </form>
@@ -50,6 +50,7 @@
 
                         <!-- method spoofing -->
                         <div class="mt-6 flex gap-2">
+                            
                             <form action="delete/<?=$d["note_id"]?> " method ="POST" class="relative">
                                 <button type="submit" class="p-2 rounded-md bg-btn-delete-light dark:bg-btn-delete-dark   peer  ">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"  class="w-5 h-5  stroke-red-500 dark:stroke-red-200">
@@ -58,6 +59,14 @@
                                 </button>
                                 <span class="bg-black w-max py-1 px-2 rounded-md text-sm text-text-dark invisible transition duration-300 opacity-0 absolute  peer-hover:visible peer-hover:opacity-100 -top-10 left-1/2 -translate-x-1/2 ">Delete</span>
                             </form>
+                            <a href="update/<?=$d["note_id"]?>" class="relative">
+                              <button type="submit" class="p-2 rounded-md text-yellow-700 dark:text-white bg-yellow-100/50 dark:bg-yellow-600/30   peer  ">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                                </svg>
+                              </button>
+                                <span class="bg-black w-max py-1 px-2 rounded-md text-sm text-text-dark invisible transition duration-300 opacity-0 absolute  peer-hover:visible peer-hover:opacity-100 -top-10 left-1/2 -translate-x-1/2 ">Edit note</span>
+                            </a>
                             <form action="archive/add/<?=$d["note_id"]?> " method="post" class="relative">
                                 <button type="submit" class="p-2 rounded-md bg-btn-archive-light dark:bg-btn-archive-dark  peer">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"  class=" stroke-green-500 dark:stroke-green-200 w-5 h-5">

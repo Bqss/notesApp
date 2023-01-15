@@ -5,58 +5,93 @@
 
     class NoteCrud extends BaseController{
 
+      protected $noteModel;
+      protected $auth;
+     
+        public function __construct(){
+          $this->noteModel = model(NoteModel::class);
+          $this-> auth = service("authentication");
+        }
+
         public function index(){
-            $noteModel = new NoteModel();
+
+          if(!$this-> auth-> isLoggedIn()){
+            return redirect()->to("login");
+          }
+            
             $searchKey = $this-> request-> getGet("search");
-            $result = isset($searchKey) ? $noteModel->search($searchKey): $noteModel;
+            $result = isset($searchKey) ? $this->noteModel->search($searchKey): $this->noteModel;
             $data = [
-                "notes" => $noteModel-> where("isArchived",false) -> findAll(),
+                "notes" => $this->noteModel-> where("isArchived",false) -> where("id_user", session("user")["user_id"]) -> findAll(),
                 "keyword" => $searchKey
             ];
-            session()->set("active_page","dashboard");
             return view("/pages/dashboard",$data);
         }
         public function add() {
-            $noteModel = new NoteModel();
+            
             $note = [
-                "id_user" => (int) user_id(),
+                "id_user" => (int) session("user")["user_id"],
                 "note_title" => $this ->request -> getPost("title"),
                 "note_text" => $this -> request -> getPost("body"),
                 "isArchived" => false 
             ];
-            $noteModel->insert($note);
+            $this->noteModel->insert($note);
             return redirect()->to("/dashboard");
         }
         public function delete($s1) {
-            $noteModel = new NoteModel();
-            $noteModel -> where("note_id",$s1) ->delete();
+            
+            $this->noteModel -> where("note_id",$s1) ->delete();
             return \redirect()->to("/dashboard");
         }
         public function detail($s1){
-            $noteModel = new NoteModel();
-            $note = $noteModel-> where("note_id",$s1) -> first();
+            
+            $note = $this->noteModel-> where("note_id",$s1) -> first();
             return view("pages/detail",$note);
         }
         public function archive(){
-            $noteModel = new NoteModel();
+            if(!$this-> auth-> isLoggedIn()){
+              return redirect()->to("login");
+            }
             $searchKey = $this-> request-> getGet("search");
-            $result = isset($searchKey) ? $noteModel->search($searchKey): $noteModel;
+            $result = isset($searchKey) ? $this->noteModel->search($searchKey): $this->noteModel;
             $data = [
                 "notes" => $result -> where("isArchived",true) -> findAll(),
                 "keyword" => $searchKey
             ];
-            session()->set("active_page","archive");
+
             return view("pages/archive",$data);
+        }
+
+        public function update ($id){
+            
+            $note = $this->noteModel-> where("note_id",$id) -> first();
+            return view("pages/update",$note);
+        }
+
+        public function attempUpdate($id){  
+          $rules = [
+            "title" => "required",
+            "body" => "required"
+          ];
+          if(!$this->validate($rules)){
+            return redirect()->back()->with("error",$this->validator->getError());
+          }
+
+          $this->noteModel->where("note_id",$id)->set([
+            "note_title" => $this->request->getPost("title"),
+            "note_body" => $this->request->getPost("body") 
+          ]) -> update();
+          return redirect()->to("dashboard"); 
         }
         
         public function addToArchive($id) {
-            $noteModel = new NoteModel();
-            $noteModel-> whereIn("note_id",[$id])->set(["isArchived" => true])->update();
-            return \redirect()-> to("/dashboard");
+            
+            $this->noteModel-> whereIn("note_id",[$id])->set(["isArchived" => true])->update();
+            return redirect()-> to("/dashboard");
         }
         public function removeFromArchive($id){
-            $noteModel = new NoteModel();
-            $noteModel -> whereIn("note_id",[$id]) -> set(["isArchived" => false ]) -> update();
+            
+            $this->noteModel -> whereIn("note_id",[$id]) -> set(["isArchived" => false ]) -> update();
             return redirect()-> to("/archive"); 
         }
         

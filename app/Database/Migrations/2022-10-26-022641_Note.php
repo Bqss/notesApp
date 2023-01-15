@@ -37,17 +37,20 @@ class Note extends Migration
             "created_at" => [
                 "type" => "DATETIME",
                 "default" => new RawSql("current_timestamp"),
-                
+            ],
+            "updated_at" => [
+              "type" => "DATETIME",
+              "default" => new RawSql("current_timestamp"),
             ]
         ]);
 
         $forge -> addPrimaryKey("note_id");
-        $forge -> addForeignKey("id_user",'users','id');
-        $forge -> createTable('Note');
+        // $forge -> addForeignKey("id_user",'user','user_id');s
+        $forge -> createTable('note');
     }
 
     public function down()
     {
-        //
+        $this -> forge -> dropTable("Note");
     }
 }

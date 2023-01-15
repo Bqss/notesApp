@@ -1,6 +1,7 @@
-<?php 
+<?php
 $isLoggedIn = logged_in() ?? false;
-$active = session()->get("active_page"); ?>
+$user = session()->get("user");
+?>
 <header>
     <nav class="transition-colors duration-300">
         <div class=" flex justify-between  mt-10 mx-auto bg-secondary-light dark:bg-secondary-dark px-5 py-4 rounded-lg items-center">
@@ -11,10 +12,10 @@ $active = session()->get("active_page"); ?>
             <?php if ($isLoggedIn) : ?>
                 <div>
                     <a href="/dashboard">
-                        <button class=" <?= $active== 'dashboard' ? "bg-[rgb(237,242,255)] dark:bg-navButton-dark" : "" ?> py-2 text-blue-400  dark:text-slate-300   px-4 rounded-sm">Home</button>
+                        <button class=" <?= url_is("dashboard") ? "bg-[rgb(237,242,255)] dark:bg-navButton-dark" : ''  ?> py-2 text-blue-400  dark:text-slate-300   px-4 rounded-sm">Home</button>
                     </a>
                     <a href="/archive">
-                        <button class="<?= $active== 'archive' ? "bg-[rgb(237,242,255)] dark:bg-navButton-dark" : "" ?> text-blue-400  dark:text-slate-300  py-2  px-4 rounded-sm">Archive</button>
+                        <button class="<?= url_is("archive") ? "bg-[rgb(237,242,255)] dark:bg-navButton-dark"  : '' ?> text-blue-400  dark:text-slate-300  py-2  px-4 rounded-sm">Archive</button>
                     </a>
                 </div>
                 
@@ -39,7 +40,7 @@ $active = session()->get("active_page"); ?>
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
                         </button>
-                        <p class="text-sm hover:cursor-default"><?= user()->__get("username")?></p>
+                        <p class="text-sm hover:cursor-default"><?= $user["username"] ?></p>
                         <div x-show="show" class="absolute flex flex-col items-center w-max rounded-md right-1/2 top-16 px-2 py-2 bg-blue-500 text-white dark:text-white z-10 " @click.outside="hide" x-transition.origin.top >
                             <ul class="space-y-1 mt-3 w-full">
                                 <li><a class=" block py-2 px-4  transition duration-100 rounded-md hover:bg-blue-400  text-sm" href="/profile">View Profile</a></li>

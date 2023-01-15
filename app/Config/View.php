@@ -53,4 +53,5 @@ class View extends BaseView
      * @var class-string<ViewDecoratorInterface>[]
      */
     public array $decorators = [];
+
 }

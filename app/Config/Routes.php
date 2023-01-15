@@ -5,6 +5,8 @@ namespace Config;
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
+
+
 // Load the system's routing file first, so that the app and ENVIRONMENT
 // can override as needed.
 if (is_file(SYSTEMPATH . 'Config/Routes.php')) {
@@ -36,12 +38,21 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.]
 
-
-
 // crud routes
 $routes -> group("/",static function($routes) {
-    $routes -> get("dashboard" , "NoteCrud::index");
+
+    // $routes -> get("login", "NoteCrud::index");
     $routes -> get("archive", "NoteCrud::archive");
+    $routes -> get("login", "AuthController::login");
+    $routes -> get("register","AuthController::register");
+    $routes -> get("dashboard","NoteCrud::index");
+    $routes -> get("archive","NoteCrud::archive");
+    $routes -> post("login","AuthController::attempLogin");
+    $routes -> post ("register","AuthController::attempRegister");
+    $routes -> get("logout","AuthController::attempLogout");
+    $routes -> get("update/(:segment)","NoteCrud::update/$1");
+    $routes -> post("update/(:segment)","NoteCrud::attempUpdate/$1");
+
     $routes -> post("delete/(:segment)","NoteCrud::delete/$1");
     $routes -> post("addNote","NoteCrud::add");
     $routes -> post("detail/(:segment)","NoteCrud::detail/$1");
