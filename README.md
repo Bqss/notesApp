@@ -5,8 +5,8 @@ nim  : 210403010014
 
 ### cara instalasi 
 
-1. clone github repo dengan cara `git clone https://github.com/Bqss/notesApp.git` <br/>
-2. masuk ke dalam folder hasil clone dengan `cd notesApp` </br>
+1. clone github repo dengan cara `git clone https://github.com/Bqss/notesApp.git` 
+2. masuk ke dalam folder hasil clone dengan `cd notesApp` 
 3. install semua dependencies dari codeigniter `composer i` </br>
 4. aktifkan xampp </br>
 5. buat database dengan menggunakan perintah `php spark db:create notesapp` <br/>
