@@ -11,7 +11,7 @@ nim  : 210403010014
 4. aktifkan xampp </br>
 5. buat database dengan menggunakan perintah `php spark db:create notesapp` 
 6. lakukan migrasi (membuat tabel secara otomatis) dengan menggunakan perintah `php spark migrate --all` 
-7. jalankan codeigniter app dengan menggunakan perintah `php spark serve
+7. jalankan codeigniter app dengan menggunakan perintah `php spark serve`
 8. aplikasi bisa digunakan :)
 
 
