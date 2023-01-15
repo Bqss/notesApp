@@ -76,7 +76,7 @@
               </button>
               <span class="bg-black w-max py-1 px-2 rounded-md text-sm text-text-dark invisible transition duration-300 opacity-0 absolute  peer-hover:visible peer-hover:opacity-100 -top-10 left-1/2 -translate-x-1/2 ">Edit note</span>
             </a>
-            <form action="archive/<?= $d["note_id"] ?> " method="post"  class="relative">
+            <form action="/<?= $d["note_id"] ?> " method="post"  class="relative">
               <input type="hidden" name="_method" value="put">
               <button type="submit" class="p-2 rounded-md bg-btn-archive-light dark:bg-btn-archive-dark  peer">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class=" stroke-green-500 dark:stroke-green-200 w-5 h-5">
