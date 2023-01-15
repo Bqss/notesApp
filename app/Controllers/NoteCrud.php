@@ -68,17 +68,11 @@
             return view("pages/update",$note);
         }
 
+        public function profile(){
+          return view("pages/profile");
+        }
+
         public function attempUpdate($id){  
-          // $rules = [
-          //   "title" => "required",
-          //   "body" => "required"
-          // ];
-          // if(!$this->validate($rules)){
-          //   return redirect()->back()->with("error",$this->validator->getError());
-          // }
-
-    
-
           $this->noteModel->where("note_id",$id)->set([
             "note_title" => $this->request->getPost("title"),
             "note_text" => $this->request->getPost("body") 

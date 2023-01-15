@@ -70,8 +70,7 @@ $routes -> group("/",static function($routes) {
     $routes -> delete("archive/(:segment)","NoteCrud::deleteFromArchive/$1");
     
     
-    
-    ;
+    $routes -> get("profile", "NoteCrud::profile" );
 });
 
 
